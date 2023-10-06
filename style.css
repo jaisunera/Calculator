@@ -8,15 +8,6 @@ h1 {
   color: #618264;
 }
 
-h6 {
-  font-family: Georgia;
-  text-align: center;
-  color: #fff;
-  background-color: #618264;
-  padding: 10px;
-  border-radius: 10px;
-}
-
 .calculator {
     width: 300px;
     margin: 0 auto;
