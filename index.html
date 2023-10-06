@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Title of Page-->
+    <title>Cute Calculator</title>
+   <!--Reference to the css style sheet-->
+    <link rel = "stylesheet" href = "style.css">
+  </head>
+
+  <body>
+    <!--Heading-->
+    <h1>Calculator for the Girlies</h1>
+    <h6>-`♡´-Yes, anyone can use the calculator - not just "the girlies" -`♡´-</h6>
+    <div class = "calculator">
+      <div class = "display-bar">
+        <input type = "text" id = "result" readonly>
+      </div>
+      <div class = "buttons">
+        <button onclick = "clear()">C</button>
+        <button onclick = "backspace()">⇦</button>
+        <button onclick = "append('/')">/</button>
+        <button onclick = "append('*')">*</button>
+        <button onclick = "append('7')">7</button>
+        <button onclick = "append('8')">8</button>
+        <button onclick = "append('9')">9</button>
+        <button onclick = "append('+')">+</button>
+        <button onclick = "append('4')">4</button>
+        <button onclick = "append('5')">5</button>
+        <button onclick = "append('6')">6</button>
+        <button onclick = "append('-')">-</button>
+        <button onclick = "append('1')">1</button>
+        <button onclick = "append('2')">2</button>
+        <button onclick = "append('3')">3</button>
+        <button class = "double-height" onclick = "calculate()"> = </button>
+        <button class = "double-width" onclick = "append('0')">0</button>
+        <button onclick = "append('.')">.</button>
+        <button onclick = "append('(')">(</button>
+        <button onclick = "append(')')">)</button>
+        <button class = "deco">⋆｡ ﾟ☁︎｡ ⋆｡ ﾟ☾ ﾟ｡⁺˚⋆｡°✩₊ ⋆</button>
+      </div>
+    </div>
+    <h2>⁺˚⋆｡°✩₊⁺˚⋆｡°✩₊⁺˚⋆｡°✩₊⁺˚⋆｡°✩₊</h2>
+    <script src = "script.js"></script>
+  </body>
+</html>
