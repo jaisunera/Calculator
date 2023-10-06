@@ -38,60 +38,68 @@ function calculate() {
 
 //Evaluation function
 function evaluation(expression) {
-  //Operators supported in this calculator
-  var operator = ['+', '-', '*', '/'];
-  //Split tokens (operators and numbers)
-  var tokens = expression.split(/\b/);;
-
-  var numberArray = []; //Numbers in an array
-  var operatorArray = []; //Operators in an array
-
-  //For loop to cycle through each token
-  for (var i = 0; i < tokens.length; i++) {
-    var token = tokens[i].trim();
-    //Skip empty
-    if (token.length === 0) continue;
-
-    //If token is an operator, push to operators array
-    if (operator.includes(token)) {
-      operatorArray.push(token);
-    } else {
-      //If token is a number, turn into float and push to numbers array
-      numberArray.push(parseFloat(token));
+  try {
+    //Splitting tokens
+    var tokens = expression.match(/([0-9.]+)|([+\-*/])/g);
+    if (!tokens) {
+      throw new Error('Invalid expression');
     }
-  }
 
-  //Perform the calculations with operators and numbers arrays while there's still an operator
-  while (operatorArray.length > 0) {
-    var operator = operatorArray.shift();
-    var number1 = numberArray.shift();
-    var number2 = numberArray.shift();
+    var numberArray = []; //Numbers in an array
+    var operatorArray = []; //Operators in an array
 
-    switch (operator) {
-      //Addition
-      case '+':
-        numberArray.unshift(number1 + number2);
-        break;
-      //Subtraction
-      case '-':
-        numberArray.unshift(number1 - number2);
-        break;
-      //Multiplication
-      case '*':
-        numberArray.unshift(number1 * number2);
-        break;
-      //Division
-      case '/':
-        numberArray.unshift(number1 / number2);
-        break;
+    //For loop to cycle through each token
+    for (var i = 0; i < tokens.length; i++) {
+      var token = tokens[i].trim();
+      //Skip empty
+      if (token.length === 0) continue;
+
+      //If token is an operator, push to operators array
+      if (['+', '-', '*', '/'].includes(token)) {
+        operatorArray.push(token);
+      } else {
+        //If token is a number, parse it as a float and push to numbers array
+        numberArray.push(parseFloat(token));
+      }
     }
-  }
 
-  //Check if there is one number in the numbers array
-  if (numberArray.length !== 1) {
+    //Perform the calculations with operators and numbers arrays while there's still an operator
+    while (operatorArray.length > 0) {
+      var operator = operatorArray.shift();
+      var number1 = numberArray.shift();
+      var number2 = numberArray.shift();
+
+      switch (operator) {
+        //Addition
+        case '+':
+          numberArray.unshift(number1 + number2);
+          break;
+        //Subtraction
+        case '-':
+          numberArray.unshift(number1 - number2);
+          break;
+        //Multiplication
+        case '*':
+          numberArray.unshift(number1 * number2);
+          break;
+        //Division
+        case '/':
+          if (number2 === 0) {
+            throw new Error('Division by zero');
+          }
+          numberArray.unshift(number1 / number2);
+          break;
+      }
+    }
+
+    //Check if there is one number in the numbers array
+    if (numberArray.length !== 1) {
+      throw new Error('Invalid expression');
+    }
+
+    //Return the calculated result
+    return numberArray[0];
+  } catch (error) {
     throw new Error('Invalid expression');
   }
-
-  //Return the calculated result
-  return numberArray[0];
 }
